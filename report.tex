@@ -1,0 +1,75 @@
+\documentclass{layout/tudelft-report}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{parskip}
+\setlength{\parindent}{0cm}
+\usepackage{csquotes}
+\graphicspath{ {figures/} }
+%% Setting up the bibliography
+\usepackage[sorting=none]{biblatex}
+\addbibresource{report.bib}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{xcolor,colortbl}
+\definecolor{maroon}{cmyk}{0,0.87,0.68,0.32}
+%% Additional packages and commands
+\setlist{itemsep=-2pt} % Reducing white space in lists slightly
+\renewcommand{\deg}{\si{\degree}\xspace} % Use \deg easily, everywhere
+\usepackage{longtable}
+\usepackage{lscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Begin of document %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%% Roman page numbering
+\frontmatter
+
+%% Defining the main parameters
+\title{Planificación de una red corporativa semipresencial}
+\author{[REDACTADO]}
+\subject{CFGS ASIR}
+
+\coverimage{figures/cover.jpg} % Aspect ratio of 2:3 (portrait) recommended
+\definecolor{title}{HTML}{4884d6} % Color for title
+
+\makecover
+
+\input{frontmatter/title-report}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+
+\input{frontmatter/licencia}
+
+%% Arabic page numbering
+\mainmatter
+
+\input{mainmatter/capitulo-1}
+
+\input{mainmatter/capitulo-2}
+\input{mainmatter/capitulo-3}
+\input{mainmatter/capitulo-4} % Create file to add
+\input{mainmatter/conclusion}
+%% Prevent urls running into margins in bibliography
+\setcounter{biburlnumpenalty}{7000}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{7000}
+
+
+%% Letters for chapters
+\appendix
+
+\input{appendix/anexo-vpn}
+% \begin{landscape}
+\input{appendix/anexo-iptables}
+% \end{landscape}
+\input{appendix/anexo-docker}
+\input{appendix/anexo-docker-compose}
+
+%% Add bibliography
+\printbibliography[heading=bibintoc,title=Bibliografía]
+\end{document}

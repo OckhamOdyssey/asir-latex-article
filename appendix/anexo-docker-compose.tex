@@ -1,0 +1,40 @@
+\chapter{Nexcloud y MariaDB con Docker}
+\label{anexo:docker-compose}
+
+A continuación se muestra el archivo \textit{docker-compose} utilizado para la instalación de Nextcloud y su conexión con el contenedor de MariaDB\cite{NextcloudDocker}.
+
+\begin{lstlisting}[language=Yaml]
+version: '2'
+
+volumes:
+  nextcloud:
+  db:
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - "db:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD='Xz#69H3hd@yM3*yKMb'
+      - MYSQL_PASSWORD='Cg^@SSLT34ck4u&Z8k'
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  app:
+    image: nextcloud
+    restart: always
+    ports:
+      - "8080:80"
+    links:
+      - db
+    volumes:
+      - "nextcloud:/var/www/html"
+    environment:
+      - MYSQL_PASSWORD='Cg^@SSLT34ck4u&Z8k'
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+\end{lstlisting}
